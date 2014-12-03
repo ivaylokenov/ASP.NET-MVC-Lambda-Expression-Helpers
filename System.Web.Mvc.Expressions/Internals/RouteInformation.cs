@@ -29,6 +29,7 @@
             string controllerName = type.GetControllerName();
             string actionName = action.GetActionName();
             routeValueDict.ProcessArea(type);
+            routeValueDict.ProcessParameters(action);
 
             var routeInformation = new RouteInformation
             {

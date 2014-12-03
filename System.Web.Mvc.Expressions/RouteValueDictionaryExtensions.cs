@@ -1,6 +1,7 @@
 ﻿namespace System.Web.Mvc.Expressions
 {
     using System;
+    using System.Linq;
     using System.Linq.Expressions;
     using System.Web.Mvc;
     using System.Web.Routing;
@@ -21,6 +22,7 @@
             routeValueDictionary.ProcessArea(type);
             routeValueDictionary.ProcessController(type);
             routeValueDictionary.ProcessAction(action);
+            routeValueDictionary.ProcessParameters(action);
         }
 
         public static void ProcessArea(this RouteValueDictionary routeValues, Type targetControllerType)
@@ -46,7 +48,30 @@
             routeValues.AddOrUpdateRouteValue("Action", actionName);
         }
 
-        public static void AddOrUpdateRouteValue(this RouteValueDictionary routeValues, string key, string value)
+        public static void ProcessParameters<TController>(this RouteValueDictionary routeValues,
+            Expression<Action<TController>> action)
+            where TController : Controller
+        {
+            var method = action.Body as MethodCallExpression;
+            var argsNames = method.Method
+                .GetParameters()
+                .Select(p => p.Name)
+                .ToList();
+
+            var args = method.Arguments
+                .Select(a => Expression.Convert(a, typeof(object)))
+                .Select(a =>
+                    Expression.Lambda<Func<object>>(a, null)
+                    .Compile()())
+                .ToList();
+
+            for (int i = 0; i < argsNames.Count; i++)
+            {
+                routeValues.AddOrUpdateRouteValue(argsNames[i], args[i]);
+            }
+        }
+
+        public static void AddOrUpdateRouteValue(this RouteValueDictionary routeValues, string key, object value)
         {
             if (routeValues.ContainsKey(key))
                 routeValues[key] = value;
