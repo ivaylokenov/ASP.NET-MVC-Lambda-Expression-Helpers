@@ -20,7 +20,7 @@
             where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression(action, routeValues);
-            return helper.BeginForm(routeInfo.ActionName, routeInfo.ControllerName, routeValues, method, ConvertHtmlAttributesToDictionary(htmlAttributes));
+            return helper.BeginForm(routeInfo.ActionName, routeInfo.ControllerName, routeValues, method, htmlAttributes);
         }
 
         public static void RenderAction<TController>(this HtmlHelper helper, Expression<Action<TController>> action, object routeValues = null)

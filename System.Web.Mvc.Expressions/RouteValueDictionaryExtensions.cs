@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Text;
     using System.Web.Mvc;
     using System.Web.Routing;
 
@@ -77,6 +78,17 @@
                 routeValues[key] = value;
             else
                 routeValues.Add(key, value);
+        }
+
+        public static string ValuesToString(this RouteValueDictionary routeValues)
+        {
+            var result = new StringBuilder();
+            foreach (var key in routeValues.Keys)
+            {
+                result.Append(string.Format("{0}:{1}", key, routeValues[key]));
+            }
+
+            return result.ToString();
         }
     }
 }
