@@ -19,18 +19,17 @@
         {
             var routeValueDict = routeValues == null ? new RouteValueDictionary() : new RouteValueDictionary(routeValues);
             routeValueDict.ProcessParameters(action);
+            var controllerType = typeof(TController);
 
-            var expressionAsString = string.Format("{0}{1}", action.ToString(), routeValueDict.ValuesToString());
+            var expressionAsString = string.Format("{0}{1}{2}", controllerType.FullName, action.ToString(), routeValueDict.ValuesToString());
             if (HttpRuntime.Cache[expressionAsString] != null)
             {
                 return HttpRuntime.Cache[expressionAsString] as RouteInformation;
             }
 
-
-            var type = typeof(TController);
-            string controllerName = type.GetControllerName();
+            string controllerName = controllerType.GetControllerName();
             string actionName = action.GetActionName();
-            routeValueDict.ProcessArea(type);
+            routeValueDict.ProcessArea(controllerType);
 
             var routeInformation = new RouteInformation
             {
