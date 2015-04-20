@@ -9,9 +9,9 @@
 
     public static class RouteValueDictionaryExtensions
     {
-        public static void AddRoutesFromExpression<TController>(this RouteValueDictionary routeValueDictionary,
-            Expression<Action<TController>> action)
-            where TController : Controller
+        public static void AddRoutesFromExpression<TController>(
+            this RouteValueDictionary routeValueDictionary,
+            Expression<Action<TController>> action) where TController : Controller
         {
             if (routeValueDictionary == null)
             {
@@ -28,11 +28,8 @@
 
         public static void ProcessArea(this RouteValueDictionary routeValues, Type targetControllerType)
         {
-            var areaName = targetControllerType.GetAreaName() ?? string.Empty;
-            if (!string.IsNullOrEmpty(areaName))
-            {
-                routeValues.AddOrUpdateRouteValue("area", areaName);
-            }
+            string areaName = targetControllerType.GetAreaName() ?? string.Empty;
+            routeValues.AddOrUpdateRouteValue("area", areaName);
         }
 
         public static void ProcessController(this RouteValueDictionary routeValues, Type targetControllerType)
@@ -61,9 +58,7 @@
 
             var args = method.Arguments
                 .Select(a => Expression.Convert(a, typeof(object)))
-                .Select(a =>
-                    Expression.Lambda<Func<object>>(a, null)
-                    .Compile()())
+                .Select(a => Expression.Lambda<Func<object>>(a, null).Compile()())
                 .ToList();
 
             for (int i = 0; i < argsNames.Count; i++)
