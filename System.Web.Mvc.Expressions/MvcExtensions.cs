@@ -21,17 +21,23 @@
         {
             var body = actionExpression.Body;
             if (body.NodeType == ExpressionType.Convert)
+            {
                 body = ((UnaryExpression)body).Operand;
+            }
 
             var memberExpr = body as MemberExpression;
 
             if (memberExpr != null)
+            {
                 return memberExpr.Member;
+            }
 
             var callExpr = body as MethodCallExpression;
 
             if (callExpr != null)
+            {
                 return callExpr.Method;
+            }
 
             return null;
         }

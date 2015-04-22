@@ -8,6 +8,12 @@
 
     internal class RouteInformation
     {
+        public string ActionName { get; set; }
+
+        public string ControllerName { get; set; }
+
+        public RouteValueDictionary RouteValueDictionary { get; set; }
+
         public static RouteInformation FromExpression<TController>(Expression<Action<TController>> action, object routeValues = null)
             where TController : Controller
         {
@@ -41,11 +47,5 @@
             HttpRuntime.Cache.Insert(expressionAsString, routeInformation);
             return routeInformation;
         }
-
-        public string ActionName { get; set; }
-
-        public string ControllerName { get; set; }
-
-        public RouteValueDictionary RouteValueDictionary { get; set; }
     }
 }
