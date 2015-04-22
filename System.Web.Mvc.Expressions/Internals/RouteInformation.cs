@@ -21,7 +21,7 @@
             routeValueDict.ProcessParameters(action);
             var controllerType = typeof(TController);
 
-            var expressionAsString = string.Format("{0}{1}{2}", controllerType.FullName, action.ToString(), routeValueDict.ValuesToString());
+            var expressionAsString = string.Format("{0}{1}{2}", controllerType.FullName, action, routeValueDict.ValuesToString());
             if (HttpRuntime.Cache[expressionAsString] != null)
             {
                 return HttpRuntime.Cache[expressionAsString] as RouteInformation;

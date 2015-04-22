@@ -1,6 +1,7 @@
 ﻿namespace System.Web.Mvc.Expressions
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq.Expressions;
     using System.Reflection;
 
@@ -52,9 +53,9 @@
             return namespaces[areaIndex + 1];
         }
 
-        private static int GetAreaIndex(string[] namespaces)
+        private static int GetAreaIndex(IReadOnlyList<string> namespaces)
         {
-            for (int i = 0; i < namespaces.Length; i++)
+            for (int i = 0; i < namespaces.Count; i++)
             {
                 if (namespaces[i] == "areas")
                 {

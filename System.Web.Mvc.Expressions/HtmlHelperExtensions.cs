@@ -5,19 +5,33 @@
     using System.Web.Mvc;
     using System.Web.Mvc.Html;
     using System.Web.Routing;
+
     using Internals;
 
     public static class HtmlHelperExtensions
     {
-        public static MvcHtmlString ActionLink<TController>(this HtmlHelper helper, string linkText, Expression<Action<TController>> action, object routeValues = null, object htmlAttributes = null)
-            where TController : Controller
+        public static MvcHtmlString ActionLink<TController>(
+            this HtmlHelper helper,
+            string linkText,
+            Expression<Action<TController>> action,
+            object routeValues = null,
+            object htmlAttributes = null) where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression(action, routeValues);
-            return helper.ActionLink(linkText, routeInfo.ActionName, routeInfo.ControllerName, routeInfo.RouteValueDictionary, ConvertHtmlAttributesToDictionary(htmlAttributes));
+            return helper.ActionLink(
+                linkText,
+                routeInfo.ActionName,
+                routeInfo.ControllerName,
+                routeInfo.RouteValueDictionary,
+                ConvertHtmlAttributesToDictionary(htmlAttributes));
         }
 
-        public static MvcForm BeginForm<TController>(this HtmlHelper helper, Expression<Action<TController>> action, FormMethod method, object routeValues = null, object htmlAttributes = null)
-            where TController : Controller
+        public static MvcForm BeginForm<TController>(
+            this HtmlHelper helper,
+            Expression<Action<TController>> action,
+            FormMethod method,
+            object routeValues = null,
+            object htmlAttributes = null) where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression(action, routeValues);
             return helper.BeginForm(routeInfo.ActionName, routeInfo.ControllerName, routeValues, method, htmlAttributes);
