@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AjaxHelperExtensions.cs" />
     <Compile Include="ControllerExtensions.cs" />
     <Compile Include="HtmlHelperExtensions.cs" />
     <Compile Include="MvcExtensions.cs" />
