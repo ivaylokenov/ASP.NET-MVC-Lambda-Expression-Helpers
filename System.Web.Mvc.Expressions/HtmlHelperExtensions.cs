@@ -3,10 +3,8 @@
     using System;
     using System.Linq.Expressions;
     using System.Web.Mvc;
+    using System.Web.Mvc.Expressions.Internals;
     using System.Web.Mvc.Html;
-    using System.Web.Routing;
-
-    using Internals;
 
     public static class HtmlHelperExtensions
     {
@@ -23,7 +21,7 @@
                 routeInfo.ActionName,
                 routeInfo.ControllerName,
                 routeInfo.RouteValueDictionary,
-                ConvertHtmlAttributesToDictionary(htmlAttributes));
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
         }
 
         public static MvcForm BeginForm<TController>(
@@ -42,16 +40,6 @@
         {
             var routeInfo = RouteInformation.FromExpression(action, routeValues);
             helper.RenderAction(routeInfo.ActionName, routeInfo.ControllerName, routeInfo.RouteValueDictionary);
-        }
-
-        private static RouteValueDictionary ConvertHtmlAttributesToDictionary(object htmlAttributes)
-        {
-            if (htmlAttributes == null)
-            {
-                return null;
-            }
-
-            return HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
         }
     }
 }

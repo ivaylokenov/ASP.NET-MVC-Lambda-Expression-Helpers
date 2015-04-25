@@ -7,9 +7,12 @@
 
     public static class MvcExtensions
     {
+        private const string ControllerSuffix = "Controller";
+
         public static string GetControllerName(this Type controllerType)
         {
-            return controllerType.Name.Replace("Controller", string.Empty);
+            var typeName = controllerType.Name;
+            return typeName.Substring(0, typeName.Length - ControllerSuffix.Length);
         }
 
         public static string GetActionName(this LambdaExpression actionExpression)
@@ -49,7 +52,7 @@
 
         public static string GetAreaName(this Type type)
         {
-            string[] namespaces = type.Namespace.ToLowerInvariant().Split('.');
+            string[] namespaces = (type.Namespace ?? string.Empty).ToLowerInvariant().Split('.');
             int areaIndex = GetAreaIndex(namespaces);
             if (areaIndex < 0)
             {

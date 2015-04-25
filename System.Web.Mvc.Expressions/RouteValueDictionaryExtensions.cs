@@ -9,21 +9,18 @@
 
     public static class RouteValueDictionaryExtensions
     {
-        public static void AddRoutesFromExpression<TController>(
-            this RouteValueDictionary routeValueDictionary,
-            Expression<Action<TController>> action) where TController : Controller
+        public static void AddRoutesFromExpression<TController>(this RouteValueDictionary routeValueDictionary, Expression<Action<TController>> action)
+            where TController : Controller
         {
-            if (routeValueDictionary == null)
+            if (routeValueDictionary != null)
             {
-                return;
+                var type = typeof(TController);
+
+                routeValueDictionary.ProcessArea(type);
+                routeValueDictionary.ProcessController(type);
+                routeValueDictionary.ProcessAction(action);
+                routeValueDictionary.ProcessParameters(action);
             }
-
-            var type = typeof(TController);
-
-            routeValueDictionary.ProcessArea(type);
-            routeValueDictionary.ProcessController(type);
-            routeValueDictionary.ProcessAction(action);
-            routeValueDictionary.ProcessParameters(action);
         }
 
         public static void ProcessArea(this RouteValueDictionary routeValues, Type targetControllerType)
