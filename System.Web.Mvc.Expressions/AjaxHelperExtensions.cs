@@ -8,14 +8,26 @@
     public static class AjaxHelperExtensions
     {
         public static MvcForm BeginForm<TController>(
-            this AjaxHelper helper, 
-            Expression<Action<TController>> action, 
+            this AjaxHelper helper,
+            Expression<Action<TController>> action,
             object routeValues = null,
-            AjaxOptions ajaxOptions = null, 
+            AjaxOptions ajaxOptions = null,
             object htmlAttributes = null) where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression(action, routeValues);
             return helper.BeginForm(routeInfo.ActionName, routeInfo.ControllerName, routeValues, ajaxOptions, htmlAttributes);
+        }
+
+        public static MvcHtmlString ActionLink<TController>(
+            this AjaxHelper helper,
+            string linkText,
+            Expression<Action<TController>> action,
+            object routeValues = null,
+            AjaxOptions ajaxOptions = null,
+            object htmlAttributes = null) where TController : Controller
+        {
+            var routeInfo = RouteInformation.FromExpression(action, routeValues);
+            return helper.ActionLink(linkText, routeInfo.ActionName, routeInfo.ControllerName, routeValues, ajaxOptions, htmlAttributes);
         }
     }
 }
