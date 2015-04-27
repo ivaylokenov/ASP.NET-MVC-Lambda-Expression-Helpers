@@ -23,7 +23,7 @@
         private static RouteInformation GetFromCache<TController>(Expression<Action<TController>> action, object routeValues = null)
             where TController : Controller
         {
-            var routeValueDict = routeValues == null ? new RouteValueDictionary() : new RouteValueDictionary(routeValues);
+            var routeValueDict = new RouteValueDictionary(routeValues);
             routeValueDict.ProcessParameters(action);
             var controllerType = typeof(TController);
 

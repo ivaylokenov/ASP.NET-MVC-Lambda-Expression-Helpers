@@ -27,7 +27,13 @@
             object htmlAttributes = null) where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression(action, routeValues);
-            return helper.ActionLink(linkText, routeInfo.ActionName, routeInfo.ControllerName, routeValues, ajaxOptions, htmlAttributes);
+            return helper.ActionLink(
+                linkText,
+                routeInfo.ActionName,
+                routeInfo.ControllerName,
+                routeInfo.RouteValueDictionary,
+                ajaxOptions,
+                htmlAttributes);
         }
     }
 }

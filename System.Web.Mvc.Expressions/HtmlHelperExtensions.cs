@@ -50,7 +50,7 @@
             object routeValues = null) where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression(action, routeValues);
-            return helper.Action(routeInfo.ActionName, routeInfo.ControllerName, routeValues);
+            return helper.Action(routeInfo.ActionName, routeInfo.ControllerName, routeInfo.RouteValueDictionary);
         }
     }
 }
