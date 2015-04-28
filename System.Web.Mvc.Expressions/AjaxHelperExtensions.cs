@@ -15,7 +15,12 @@
             object htmlAttributes = null) where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression(action, routeValues);
-            return helper.BeginForm(routeInfo.ActionName, routeInfo.ControllerName, routeValues, ajaxOptions, htmlAttributes);
+            return helper.BeginForm(
+                routeInfo.ActionName,
+                routeInfo.ControllerName,
+                routeInfo.RouteValueDictionary,
+                ajaxOptions,
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
         }
 
         public static MvcHtmlString ActionLink<TController>(
@@ -33,7 +38,7 @@
                 routeInfo.ControllerName,
                 routeInfo.RouteValueDictionary,
                 ajaxOptions,
-                htmlAttributes);
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
         }
     }
 }
