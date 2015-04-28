@@ -8,10 +8,21 @@ Currently supported in Controller (add "using System.Web.Mvc.Expressions;"):
 
 Currently supported in Views (add namespace "System.Web.Mvc.Expressions" to the web.config file in the Views folder):
 
-- Html.ActionLink<HomeController>(c => c.Index())
+- Html.ActionLink<HomeController>(c => c.Index(5))
 
-- Html.BeginForm<HomeController>(c => c.Index())
+- Html.BeginForm<HomeController>(c => c.Index(5))
 
-- Html.RenderAction<HomeController>(c => c.Index())
+- Html.RenderAction<HomeController>(c => c.Index(5))
 
-- Url.Action<HomeController>(c => c.Index())
+- Html.Action<HomeController>(c => c.Index(5))
+
+- Url.Action<HomeController>(c => c.Index(5))
+
+- Ajax.ActionLine<HomeController>(c => c.Index(5))
+
+- Ajax.BeginForm<HomeController>(c => c.Index(5))
+
+Contributors:
+
+- Ivaylo Kenov
+- Vladislav Karamfilov
