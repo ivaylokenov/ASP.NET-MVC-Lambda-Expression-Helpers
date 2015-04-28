@@ -1,18 +1,17 @@
 ﻿namespace System.Web.Mvc.Expressions
 {
-    using System;
     using System.Linq.Expressions;
-    using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
     using System.Web.Mvc.Expressions.Internals;
     using System.Web.Mvc.Html;
 
-    public static class HtmlHelperExtensions
+    public static class AjaxHelperExtensions
     {
         public static MvcForm BeginForm<TController>(
-            this HtmlHelper helper,
+            this AjaxHelper helper,
             Expression<Action<TController>> action,
-            FormMethod method,
             object routeValues = null,
+            AjaxOptions ajaxOptions = null,
             object htmlAttributes = null) where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression(action, routeValues);
@@ -20,15 +19,16 @@
                 routeInfo.ActionName,
                 routeInfo.ControllerName,
                 routeInfo.RouteValueDictionary,
-                method,
+                ajaxOptions,
                 HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
         }
 
         public static MvcHtmlString ActionLink<TController>(
-            this HtmlHelper helper,
+            this AjaxHelper helper,
             string linkText,
             Expression<Action<TController>> action,
             object routeValues = null,
+            AjaxOptions ajaxOptions = null,
             object htmlAttributes = null) where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression(action, routeValues);
@@ -37,25 +37,8 @@
                 routeInfo.ActionName,
                 routeInfo.ControllerName,
                 routeInfo.RouteValueDictionary,
+                ajaxOptions,
                 HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
-        }
-
-        public static void RenderAction<TController>(
-            this HtmlHelper helper,
-            Expression<Action<TController>> action,
-            object routeValues = null) where TController : Controller
-        {
-            var routeInfo = RouteInformation.FromExpression(action, routeValues);
-            helper.RenderAction(routeInfo.ActionName, routeInfo.ControllerName, routeInfo.RouteValueDictionary);
-        }
-
-        public static MvcHtmlString Action<TController>(
-            this HtmlHelper helper,
-            Expression<Action<TController>> action,
-            object routeValues = null) where TController : Controller
-        {
-            var routeInfo = RouteInformation.FromExpression(action, routeValues);
-            return helper.Action(routeInfo.ActionName, routeInfo.ControllerName, routeInfo.RouteValueDictionary);
         }
     }
 }

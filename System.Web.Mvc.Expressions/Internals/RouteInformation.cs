@@ -8,6 +8,12 @@
 
     internal class RouteInformation
     {
+        public string ActionName { get; set; }
+
+        public string ControllerName { get; set; }
+
+        public RouteValueDictionary RouteValueDictionary { get; set; }
+
         public static RouteInformation FromExpression<TController>(Expression<Action<TController>> action, object routeValues = null)
             where TController : Controller
         {
@@ -17,11 +23,11 @@
         private static RouteInformation GetFromCache<TController>(Expression<Action<TController>> action, object routeValues = null)
             where TController : Controller
         {
-            var routeValueDict = routeValues == null ? new RouteValueDictionary() : new RouteValueDictionary(routeValues);
+            var routeValueDict = new RouteValueDictionary(routeValues);
             routeValueDict.ProcessParameters(action);
             var controllerType = typeof(TController);
 
-            var expressionAsString = string.Format("{0}{1}{2}", controllerType.FullName, action.ToString(), routeValueDict.ValuesToString());
+            var expressionAsString = string.Format("{0}{1}{2}", controllerType.FullName, action, routeValueDict.ValuesToString());
             if (HttpRuntime.Cache[expressionAsString] != null)
             {
                 return HttpRuntime.Cache[expressionAsString] as RouteInformation;
@@ -41,11 +47,5 @@
             HttpRuntime.Cache.Insert(expressionAsString, routeInformation);
             return routeInformation;
         }
-
-        public string ActionName { get; set; }
-
-        public string ControllerName { get; set; }
-
-        public RouteValueDictionary RouteValueDictionary { get; set; }
     }
 }
