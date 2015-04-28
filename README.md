@@ -18,7 +18,7 @@ Currently supported in Views (add namespace "System.Web.Mvc.Expressions" to the 
 
 - Url.Action<HomeController>(c => c.Index(5))
 
-- Ajax.ActionLine<HomeController>(c => c.Index(5))
+- Ajax.ActionLink<HomeController>(c => c.Index(5))
 
 - Ajax.BeginForm<HomeController>(c => c.Index(5))
 
