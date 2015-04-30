@@ -6,6 +6,8 @@ Currently supported in Controller (add "using System.Web.Mvc.Expressions;"):
 
 - RedirectToAction<HomeController>(c => c.Index())
 
+- RedirectToActionPermanent<HomeController>(c => c.Index())
+
 Currently supported in Views (add namespace "System.Web.Mvc.Expressions" to the web.config file in the Views folder):
 
 - Html.ActionLink<HomeController>(c => c.Index(5))
