@@ -25,6 +25,14 @@
             return GetRedirectFromExpression(action, routeValues);
         }
 
+        public static RedirectToRouteResult RedirectToAction<TRedirectController>(
+            this Controller controller,
+            Expression<Action<TRedirectController>> action,
+            object routeValues = null) where TRedirectController : Controller
+        {
+            return GetRedirectFromExpression(action, routeValues);
+        }
+
         public static RedirectToRouteResult RedirectToActionPermanent<TController>(
             this TController controller,
             Expression<Action<TController>> action,
@@ -38,6 +46,15 @@
                 Expression<Action<TRedirectController>> action,
                 object routeValues = null)
             where TController : Controller
+            where TRedirectController : Controller
+        {
+            return GetRedirectFromExpression(action, routeValues, true);
+        }
+
+        public static RedirectToRouteResult RedirectToActionPermanent<TRedirectController>(
+                this Controller controller,
+                Expression<Action<TRedirectController>> action,
+                object routeValues = null)
             where TRedirectController : Controller
         {
             return GetRedirectFromExpression(action, routeValues, true);
