@@ -10,7 +10,7 @@ Currently supported in Controller (add "using System.Web.Mvc.Expressions;"):
 
 - AddModelError\<FooInputModel, int\>(m => m.Bar, "Invalid value for Bar.")
 
-- AddModelError\<FooInputModel, string\>(m => m.Baz, new ArgumentOutOfRangeException("Baz", "Invalid value for Baz.")
+- AddModelError\<FooInputModel, string\>(m => m.Baz, new ArgumentException("Invalid value for Baz.")
 
 Currently supported in Views (add namespace "System.Web.Mvc.Expressions" to the web.config file in the Views folder):
 
