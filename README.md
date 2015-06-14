@@ -8,6 +8,10 @@ Currently supported in Controller (add "using System.Web.Mvc.Expressions;"):
 
 - RedirectToActionPermanent<HomeController>(c => c.Index())
 
+- AddModelError<FooInputModel, int>(m => m.Bar, "Invalid value for Bar.")
+
+- AddModelError<FooInputModel, string>(m => m.Baz, new ArgumentOutOfRangeException("Baz", "Invalid value for Baz.")
+
 Currently supported in Views (add namespace "System.Web.Mvc.Expressions" to the web.config file in the Views folder):
 
 - Html.ActionLink<HomeController>(c => c.Index(5))
