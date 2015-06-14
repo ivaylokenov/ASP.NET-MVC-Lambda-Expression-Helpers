@@ -70,6 +70,7 @@
     <Compile Include="AjaxHelperExtensions.cs" />
     <Compile Include="ControllerExtensions.cs" />
     <Compile Include="HtmlHelperExtensions.cs" />
+    <Compile Include="ModelStateDictionaryExtensions.cs" />
     <Compile Include="MvcExtensions.cs" />
     <Compile Include="RouteValueDictionaryExtensions.cs" />
     <Compile Include="UrlHelperExtensions.cs" />
