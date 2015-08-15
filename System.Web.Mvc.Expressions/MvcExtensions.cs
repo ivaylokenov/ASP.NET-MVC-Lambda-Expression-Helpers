@@ -20,12 +20,12 @@
             var method = ((MethodCallExpression)actionExpression.Body).Method;
 
             var actionNameAttribute = method.GetCustomAttribute<ActionNameAttribute>();
-            if (actionNameAttribute != null)
+            if (actionNameAttribute == null)
             {
-                return actionNameAttribute.Name;
+                return method.Name;
             }
 
-            return method.Name;
+            return actionNameAttribute.Name;
         }
 
         public static MemberInfo GetMember(this LambdaExpression actionExpression)
