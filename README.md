@@ -28,6 +28,9 @@ Currently supported in Views (add namespace "System.Web.Mvc.Expressions" to the 
 
 - Ajax.BeginForm\<HomeController\>(c => c.Index(5))
 
+More info:
+- Support for `ActionNameAttribute` which value overrides the action name when generating URL.
+
 Contributors:
 
 - Ivaylo Kenov

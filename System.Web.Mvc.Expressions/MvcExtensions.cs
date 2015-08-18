@@ -17,7 +17,15 @@
 
         public static string GetActionName(this LambdaExpression actionExpression)
         {
-            return ((MethodCallExpression)actionExpression.Body).Method.Name;
+            var method = ((MethodCallExpression)actionExpression.Body).Method;
+
+            var actionNameAttribute = method.GetCustomAttribute<ActionNameAttribute>();
+            if (actionNameAttribute == null)
+            {
+                return method.Name;
+            }
+
+            return actionNameAttribute.Name;
         }
 
         public static MemberInfo GetMember(this LambdaExpression actionExpression)
