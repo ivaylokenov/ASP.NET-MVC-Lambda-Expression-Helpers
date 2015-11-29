@@ -3,6 +3,7 @@
     using System;
     using System.Linq.Expressions;
     using System.Web.Mvc;
+    using System.Web.Mvc.Expressions.Internals;
     using System.Web.Routing;
 
     public static class ControllerExtensions
@@ -31,10 +32,10 @@
                 bool permanent = false)
             where TRedirectController : Controller
         {
-            var routeValuesDict = new RouteValueDictionary(routeValues);
-            routeValuesDict.AddRoutesFromExpression(action);
+            var routeValuesDictionary = new RouteValueDictionary(routeValues);
+            routeValuesDictionary.AddRouteValuesFromExpression(action);
 
-            return new RedirectToRouteResult(null, routeValuesDict, permanent);
+            return new RedirectToRouteResult(null, routeValuesDictionary, permanent);
         }
     }
 }
