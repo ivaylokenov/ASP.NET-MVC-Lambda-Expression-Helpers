@@ -34,7 +34,7 @@
         {
             if (keyExpression == null)
             {
-                throw new ArgumentNullException("keyExpression");
+                throw new ArgumentNullException(nameof(keyExpression));
             }
 
             var isValid = false;
@@ -63,7 +63,9 @@
 
             if (!isValid)
             {
-                throw new ArgumentOutOfRangeException("keyExpression", "keyExpression should refer to a member property or indexer.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(keyExpression),
+                    $"{nameof(keyExpression)} should refer to a member property or indexer.");
             }
         }
 

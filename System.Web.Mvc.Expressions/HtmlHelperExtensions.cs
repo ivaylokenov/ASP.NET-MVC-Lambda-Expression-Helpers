@@ -9,11 +9,12 @@
     public static class HtmlHelperExtensions
     {
         public static MvcForm BeginForm<TController>(
-            this HtmlHelper helper,
-            Expression<Action<TController>> action,
-            FormMethod method,
-            object routeValues = null,
-            object htmlAttributes = null) where TController : Controller
+                this HtmlHelper helper,
+                Expression<Action<TController>> action,
+                FormMethod method,
+                object routeValues = null,
+                object htmlAttributes = null)
+            where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression(action, routeValues);
             return helper.BeginForm(
@@ -25,11 +26,12 @@
         }
 
         public static MvcHtmlString ActionLink<TController>(
-            this HtmlHelper helper,
-            string linkText,
-            Expression<Action<TController>> action,
-            object routeValues = null,
-            object htmlAttributes = null) where TController : Controller
+                this HtmlHelper helper,
+                string linkText,
+                Expression<Action<TController>> action,
+                object routeValues = null,
+                object htmlAttributes = null)
+            where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression(action, routeValues);
             return helper.ActionLink(
@@ -41,18 +43,20 @@
         }
 
         public static void RenderAction<TController>(
-            this HtmlHelper helper,
-            Expression<Action<TController>> action,
-            object routeValues = null) where TController : Controller
+                this HtmlHelper helper,
+                Expression<Action<TController>> action,
+                object routeValues = null)
+            where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression(action, routeValues);
             helper.RenderAction(routeInfo.ActionName, routeInfo.ControllerName, routeInfo.RouteValueDictionary);
         }
 
         public static MvcHtmlString Action<TController>(
-            this HtmlHelper helper,
-            Expression<Action<TController>> action,
-            object routeValues = null) where TController : Controller
+                this HtmlHelper helper,
+                Expression<Action<TController>> action,
+                object routeValues = null)
+            where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression(action, routeValues);
             return helper.Action(routeInfo.ActionName, routeInfo.ControllerName, routeInfo.RouteValueDictionary);
