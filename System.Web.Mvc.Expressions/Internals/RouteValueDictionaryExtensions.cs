@@ -47,11 +47,11 @@
             where TController : Controller
         {
             var methodCallExpression = action.Body as MethodCallExpression;
-            if (methodCallExpression == null)
+            if (methodCallExpression?.Object == null)
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(action),
-                    "Expected method call expression but received other type of expression instead.");
+                    "Expected instance method call expression but received other type of expression instead.");
             }
 
             var methodParameters = methodCallExpression.Method.GetParameters();
