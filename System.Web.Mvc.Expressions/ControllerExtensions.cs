@@ -8,6 +8,15 @@
 
     public static class ControllerExtensions
     {
+        public static RedirectToRouteResult RedirectToAction<TController>(
+                this TController controller,
+                Expression<Action<TController>> action,
+                object routeValues = null)
+            where TController : Controller
+        {
+            return GetRedirectFromExpression(action, routeValues);
+        }
+
         public static RedirectToRouteResult RedirectToAction<TRedirectController>(
                 this Controller controller,
                 Expression<Action<TRedirectController>> action,
@@ -15,6 +24,15 @@
             where TRedirectController : Controller
         {
             return GetRedirectFromExpression(action, routeValues);
+        }
+
+        public static RedirectToRouteResult RedirectToActionPermanent<TController>(
+                this TController controller,
+                Expression<Action<TController>> action,
+                object routeValues = null)
+            where TController : Controller
+        {
+            return GetRedirectFromExpression(action, routeValues, true);
         }
 
         public static RedirectToRouteResult RedirectToActionPermanent<TRedirectController>(
