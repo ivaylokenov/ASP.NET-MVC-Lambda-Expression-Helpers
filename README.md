@@ -2,6 +2,15 @@ ASP.NET-MVC-Lambda-Expression-Helpers
 =====================================
 Extension methods allowing using Lambda Expressions instead of magic strings in your ASP.NET MVC 5 application. It resolves all route values, including areas and parameters in the method expression.
 
+To install from NuGet:
+
+	Install-Package System.Web.Mvc.Expressions
+	
+For other interesting packages check out:
+
+ - [AspNet.Mvc.TypedRouting](https://github.com/ivaylokenov/AspNet.Mvc.TypedRouting) - typed routing and link generation for ASP.NET MVC 6
+ - [MyTested.WebApi](https://github.com/ivaylokenov/MyTested.WebApi) - fluent testing framework for ASP.NET Web API 2
+
 Currently supported in Controller (add "using System.Web.Mvc.Expressions;"):
 
 - RedirectToAction\<HomeController\>(c => c.Index())
