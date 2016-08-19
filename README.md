@@ -1,4 +1,4 @@
-<h1><img src="https://raw.githubusercontent.com/ivaylokenov/ASP.NET-MVC-Lambda-Expression-Helpers/master/logo.png" align="left" alt="MyTested.AspNetCore.Mvc" width="100">&nbsp; ASP.NET-MVC-Lambda-Expression-Helpers</h1>
+<h1><img src="https://raw.githubusercontent.com/ivaylokenov/ASP.NET-MVC-Lambda-Expression-Helpers/master/logo.png" align="left" alt="MyTested.AspNetCore.Mvc" width="100">&nbsp; ASP.NET-MVC-Lambda-Expression-Helpers - Typed <br />&nbsp;  link generation for ASP.NET Core MVC</h1>
 =====================================
 Extension methods allowing using Lambda Expressions instead of magic strings in your ASP.NET MVC 5 application. It resolves all route values, including areas and parameters in the method expression.
 
