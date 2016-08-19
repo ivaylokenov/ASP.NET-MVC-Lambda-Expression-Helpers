@@ -2,6 +2,8 @@
 =====================================
 Extension methods allowing using Lambda Expressions instead of magic strings in your ASP.NET MVC 5 application. It resolves all route values, including areas and parameters in the method expression.
 
+[![Build status](https://ci.appveyor.com/api/projects/status/7afu9dfmj9y1k0bv?svg=true)](https://ci.appveyor.com/project/ivaylokenov/asp-net-mvc-lambda-expression-helpers) [![NuGet Version](http://img.shields.io/nuget/v/System.Web.Mvc.Expressions.svg?style=flat)](https://www.nuget.org/packages/System.Web.Mvc.Expressions/) 
+
 To install from NuGet:
 
 	Install-Package System.Web.Mvc.Expressions
