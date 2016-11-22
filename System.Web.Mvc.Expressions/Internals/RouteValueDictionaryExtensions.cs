@@ -9,7 +9,7 @@
     {
         public static void AddRouteValuesFromExpression<TController>(
                 this RouteValueDictionary routeValueDictionary,
-                Expression<Action<TController>> action)
+                LambdaExpression action)
             where TController : Controller
         {
             var type = typeof(TController);
@@ -32,19 +32,13 @@
             routeValues.AddOrUpdateRouteValue("Controller", controllerName);
         }
 
-        public static void ProcessAction<TController>(
-                this RouteValueDictionary routeValues,
-                Expression<Action<TController>> action)
-            where TController : Controller
+        public static void ProcessAction(this RouteValueDictionary routeValues, LambdaExpression action)
         {
             string actionName = action.GetActionName();
             routeValues.AddOrUpdateRouteValue("Action", actionName);
         }
 
-        public static void ProcessParameters<TController>(
-                this RouteValueDictionary routeValues,
-                Expression<Action<TController>> action)
-            where TController : Controller
+        public static void ProcessParameters(this RouteValueDictionary routeValues, LambdaExpression action)
         {
             var methodCallExpression = action.Body as MethodCallExpression;
             if (methodCallExpression?.Object == null)
