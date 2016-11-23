@@ -45,6 +45,7 @@ Currently supported in Views (add namespace "System.Web.Mvc.Expressions" to the 
 ```
 More info:
 - Support for `ActionNameAttribute` which value overrides the action name when generating URL.
+- Support for URL generation to async controller actions.
 
 Authors:
 
