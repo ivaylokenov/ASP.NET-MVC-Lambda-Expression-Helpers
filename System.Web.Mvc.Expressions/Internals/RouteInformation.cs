@@ -20,9 +20,7 @@
 
         public RouteValueDictionary RouteValueDictionary { get; set; }
 
-        public static RouteInformation FromExpression<TController>(
-                Expression<Action<TController>> action,
-                object routeValues = null)
+        public static RouteInformation FromExpression<TController>(LambdaExpression action, object routeValues = null)
             where TController : Controller
         {
             string actionName = action.GetActionName();
