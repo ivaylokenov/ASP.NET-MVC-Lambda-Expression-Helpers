@@ -44,6 +44,8 @@ Currently supported in Views (add namespace "System.Web.Mvc.Expressions" to the 
 - Ajax.BeginForm<HomeController>(c => c.Index(5))
 ```
 More info:
+- Support for areas out of the box.
+- Support for attribute routing - `RouteAttribute`, `RoutePrefixAttribute` and `RouteAreaAttribute`.
 - Support for `ActionNameAttribute` which value overrides the action name when generating URL.
 - Support for URL generation to async controller actions.
 
