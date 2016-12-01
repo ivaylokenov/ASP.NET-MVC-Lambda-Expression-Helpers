@@ -38,11 +38,17 @@
 
         public static string GetAreaName(this Type type)
         {
+            var routeAreaAttribute = type.GetCustomAttribute<RouteAreaAttribute>();
+            if (routeAreaAttribute != null)
+            {
+                return routeAreaAttribute.AreaPrefix;
+            }
+
             string[] namespaceParts = (type.Namespace ?? string.Empty).ToLowerInvariant().Split('.');
             int areaIndex = GetAreaIndex(namespaceParts);
             if (areaIndex < 0)
             {
-                return null;
+                return string.Empty;
             }
 
             return namespaceParts[areaIndex + 1];

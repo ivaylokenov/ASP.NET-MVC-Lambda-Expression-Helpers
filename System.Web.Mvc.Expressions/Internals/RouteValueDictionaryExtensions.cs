@@ -22,7 +22,7 @@
 
         public static void ProcessArea(this RouteValueDictionary routeValues, Type targetControllerType)
         {
-            string areaName = targetControllerType.GetAreaName() ?? string.Empty;
+            string areaName = targetControllerType.GetAreaName();
             routeValues.AddOrUpdateRouteValue("area", areaName);
         }
 
@@ -59,6 +59,11 @@
 
         public static void AddOrUpdateRouteValue(this RouteValueDictionary routeValues, string key, object value)
         {
+            if (value == null)
+            {
+                return;
+            }
+
             if (routeValues.ContainsKey(key))
             {
                 routeValues[key] = value;
