@@ -5,7 +5,7 @@
     using System.Web.Mvc;
     using System.Web.Routing;
 
-    internal static class RouteValueDictionaryExtensions
+    public static class RouteValueDictionaryExtensions
     {
         public static void AddRouteValuesFromExpression<TController>(
                 this RouteValueDictionary routeValueDictionary,

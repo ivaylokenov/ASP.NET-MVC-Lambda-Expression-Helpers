@@ -1,11 +1,10 @@
 ﻿namespace System.Web.Mvc.Expressions.Internals
 {
-    using System;
     using System.Linq.Expressions;
     using System.Web.Mvc;
     using System.Web.Routing;
 
-    internal class RouteInformation
+    public class RouteInformation
     {
         public RouteInformation(string actionName, string controllerName, RouteValueDictionary routeValueDictionary)
         {

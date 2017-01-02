@@ -5,7 +5,7 @@
     using System.Linq.Expressions;
     using System.Reflection;
 
-    internal static class MvcExtensions
+    public static class MvcExtensions
     {
         private const string ControllerSuffix = "Controller";
 
