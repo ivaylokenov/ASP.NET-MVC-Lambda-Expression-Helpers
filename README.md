@@ -53,3 +53,7 @@ Authors:
 
 - [Ivaylo Kenov](https://github.com/ivaylokenov)
 - [Vladislav Karamfilov](https://github.com/vladislav-karamfilov)
+
+Contributors:
+
+- [Wayne Brantley](https://github.com/waynebrantley)
