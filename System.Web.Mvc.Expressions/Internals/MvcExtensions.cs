@@ -41,7 +41,7 @@
             var routeAreaAttribute = type.GetCustomAttribute<RouteAreaAttribute>();
             if (routeAreaAttribute != null)
             {
-                return routeAreaAttribute.AreaPrefix;
+                return routeAreaAttribute.AreaName;
             }
 
             string[] namespaceParts = (type.Namespace ?? string.Empty).ToLowerInvariant().Split('.');
