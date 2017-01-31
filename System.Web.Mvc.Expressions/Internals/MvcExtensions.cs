@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq.Expressions;
     using System.Reflection;
-    using System.Collections.Concurrent
+    using System.Collections.Concurrent;
 
     public static class MvcExtensions
     {
