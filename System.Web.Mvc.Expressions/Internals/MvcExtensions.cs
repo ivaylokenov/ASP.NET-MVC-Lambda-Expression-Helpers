@@ -4,12 +4,14 @@
     using System.Collections.Generic;
     using System.Linq.Expressions;
     using System.Reflection;
+    using System.Collections.Concurrent
 
     public static class MvcExtensions
     {
         private const string ControllerSuffix = "Controller";
 
         private static ConcurrentDictionary<MethodInfo, string> ActionNameInfo = new ConcurrentDictionary<MethodInfo, string>();
+        
         public static string GetActionName(this LambdaExpression actionExpression)
         {
             var methodCallExpression = actionExpression.Body as MethodCallExpression;
@@ -23,8 +25,10 @@
             var actionMethod = methodCallExpression.Method;
             string result;
             if (ActionNameInfo.TryGetValue(actionMethod, out result))
+            {
                 return result;
-
+            }
+            
             var actionNameAttribute = actionMethod.GetCustomAttribute<ActionNameAttribute>();
             result = actionNameAttribute?.Name ?? actionMethod.Name;
             ActionNameInfo.TryAdd(actionMethod, result);
@@ -38,11 +42,14 @@
         }
 
         private static ConcurrentDictionary<Type, string> RouteAreaInfo = new ConcurrentDictionary<Type, string>();
+        
         public static string GetAreaName(this Type type)
         {
             string result;
             if (RouteAreaInfo.TryGetValue(type, out result))
+            {
                 return result;
+            }
 
             var routeAreaAttribute = type.GetCustomAttribute<RouteAreaAttribute>();
             if (routeAreaAttribute != null)
