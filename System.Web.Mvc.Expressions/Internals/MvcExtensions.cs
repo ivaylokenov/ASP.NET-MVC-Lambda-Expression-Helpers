@@ -4,11 +4,14 @@
     using System.Collections.Generic;
     using System.Linq.Expressions;
     using System.Reflection;
+    using System.Collections.Concurrent;
 
     public static class MvcExtensions
     {
         private const string ControllerSuffix = "Controller";
 
+        private static ConcurrentDictionary<MethodInfo, string> ActionNameInfo = new ConcurrentDictionary<MethodInfo, string>();
+        
         public static string GetActionName(this LambdaExpression actionExpression)
         {
             var methodCallExpression = actionExpression.Body as MethodCallExpression;
@@ -20,14 +23,16 @@
             }
 
             var actionMethod = methodCallExpression.Method;
-
-            var actionNameAttribute = actionMethod.GetCustomAttribute<ActionNameAttribute>();
-            if (actionNameAttribute == null)
+            string result;
+            if (ActionNameInfo.TryGetValue(actionMethod, out result))
             {
-                return actionMethod.Name;
+                return result;
             }
-
-            return actionNameAttribute.Name;
+            
+            var actionNameAttribute = actionMethod.GetCustomAttribute<ActionNameAttribute>();
+            result = actionNameAttribute?.Name ?? actionMethod.Name;
+            ActionNameInfo.TryAdd(actionMethod, result);
+            return result;
         }
 
         public static string GetControllerName(this Type controllerType)
@@ -36,22 +41,28 @@
             return typeName.Substring(0, typeName.Length - ControllerSuffix.Length);
         }
 
+        private static ConcurrentDictionary<Type, string> RouteAreaInfo = new ConcurrentDictionary<Type, string>();
+        
         public static string GetAreaName(this Type type)
         {
+            string result;
+            if (RouteAreaInfo.TryGetValue(type, out result))
+            {
+                return result;
+            }
+
             var routeAreaAttribute = type.GetCustomAttribute<RouteAreaAttribute>();
             if (routeAreaAttribute != null)
             {
+                RouteAreaInfo.TryAdd(type, routeAreaAttribute.AreaName);
                 return routeAreaAttribute.AreaName;
             }
 
             string[] namespaceParts = (type.Namespace ?? string.Empty).ToLowerInvariant().Split('.');
             int areaIndex = GetAreaIndex(namespaceParts);
-            if (areaIndex < 0)
-            {
-                return string.Empty;
-            }
-
-            return namespaceParts[areaIndex + 1];
+            result = areaIndex < 0 ? string.Empty : namespaceParts[areaIndex + 1];
+            RouteAreaInfo.TryAdd(type, result);
+            return result;
         }
 
         private static int GetAreaIndex(IReadOnlyList<string> namespaceParts)
