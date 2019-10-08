@@ -1,11 +1,10 @@
 ﻿namespace System.Web.Mvc.Expressions.Internals
 {
-    using System;
     using System.Linq.Expressions;
     using System.Web.Mvc;
     using System.Web.Routing;
 
-    internal class RouteInformation
+    public class RouteInformation
     {
         public RouteInformation(string actionName, string controllerName, RouteValueDictionary routeValueDictionary)
         {
@@ -20,9 +19,7 @@
 
         public RouteValueDictionary RouteValueDictionary { get; set; }
 
-        public static RouteInformation FromExpression<TController>(
-                Expression<Action<TController>> action,
-                object routeValues = null)
+        public static RouteInformation FromExpression<TController>(LambdaExpression action, object routeValues = null)
             where TController : Controller
         {
             string actionName = action.GetActionName();

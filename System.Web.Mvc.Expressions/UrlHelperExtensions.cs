@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq.Expressions;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.Mvc.Expressions.Internals;
 
@@ -13,7 +14,17 @@
                 object routeValues = null)
             where TController : Controller
         {
-            var routeInfo = RouteInformation.FromExpression(action, routeValues);
+            var routeInfo = RouteInformation.FromExpression<TController>(action, routeValues);
+            return url.Action(routeInfo.ActionName, routeInfo.ControllerName, routeInfo.RouteValueDictionary);
+        }
+
+        public static string Action<TController>(
+                this UrlHelper url,
+                Expression<Func<TController, Task>> action,
+                object routeValues = null)
+            where TController : Controller
+        {
+            var routeInfo = RouteInformation.FromExpression<TController>(action, routeValues);
             return url.Action(routeInfo.ActionName, routeInfo.ControllerName, routeInfo.RouteValueDictionary);
         }
     }

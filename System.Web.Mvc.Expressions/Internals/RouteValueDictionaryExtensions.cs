@@ -5,11 +5,11 @@
     using System.Web.Mvc;
     using System.Web.Routing;
 
-    internal static class RouteValueDictionaryExtensions
+    public static class RouteValueDictionaryExtensions
     {
         public static void AddRouteValuesFromExpression<TController>(
                 this RouteValueDictionary routeValueDictionary,
-                Expression<Action<TController>> action)
+                LambdaExpression action)
             where TController : Controller
         {
             var type = typeof(TController);
@@ -22,7 +22,7 @@
 
         public static void ProcessArea(this RouteValueDictionary routeValues, Type targetControllerType)
         {
-            string areaName = targetControllerType.GetAreaName() ?? string.Empty;
+            string areaName = targetControllerType.GetAreaName();
             routeValues.AddOrUpdateRouteValue("area", areaName);
         }
 
@@ -32,19 +32,13 @@
             routeValues.AddOrUpdateRouteValue("Controller", controllerName);
         }
 
-        public static void ProcessAction<TController>(
-                this RouteValueDictionary routeValues,
-                Expression<Action<TController>> action)
-            where TController : Controller
+        public static void ProcessAction(this RouteValueDictionary routeValues, LambdaExpression action)
         {
             string actionName = action.GetActionName();
             routeValues.AddOrUpdateRouteValue("Action", actionName);
         }
 
-        public static void ProcessParameters<TController>(
-                this RouteValueDictionary routeValues,
-                Expression<Action<TController>> action)
-            where TController : Controller
+        public static void ProcessParameters(this RouteValueDictionary routeValues, LambdaExpression action)
         {
             var methodCallExpression = action.Body as MethodCallExpression;
             if (methodCallExpression?.Object == null)
@@ -65,6 +59,11 @@
 
         public static void AddOrUpdateRouteValue(this RouteValueDictionary routeValues, string key, object value)
         {
+            if (value == null)
+            {
+                return;
+            }
+
             if (routeValues.ContainsKey(key))
             {
                 routeValues[key] = value;

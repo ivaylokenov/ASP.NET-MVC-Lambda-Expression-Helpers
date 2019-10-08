@@ -4,7 +4,7 @@
     using System.Linq.Expressions;
     using System.Reflection;
 
-    internal static class ExpressionHelpers
+    public static class ExpressionHelpers
     {
         public static object GetArgumentValue(Expression argumentExpression)
         {
