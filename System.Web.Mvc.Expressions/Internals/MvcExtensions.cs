@@ -1,17 +1,20 @@
 ﻿namespace System.Web.Mvc.Expressions.Internals
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq.Expressions;
     using System.Reflection;
-    using System.Collections.Concurrent;
 
     public static class MvcExtensions
     {
         private const string ControllerSuffix = "Controller";
 
+#pragma warning disable SA1306
         private static ConcurrentDictionary<MethodInfo, string> ActionNameInfo = new ConcurrentDictionary<MethodInfo, string>();
-        
+        private static ConcurrentDictionary<Type, string> RouteAreaInfo = new ConcurrentDictionary<Type, string>();
+#pragma warning restore SA1306
+
         public static string GetActionName(this LambdaExpression actionExpression)
         {
             var methodCallExpression = actionExpression.Body as MethodCallExpression;
@@ -28,7 +31,7 @@
             {
                 return result;
             }
-            
+
             var actionNameAttribute = actionMethod.GetCustomAttribute<ActionNameAttribute>();
             result = actionNameAttribute?.Name ?? actionMethod.Name;
             ActionNameInfo.TryAdd(actionMethod, result);
@@ -41,8 +44,6 @@
             return typeName.Substring(0, typeName.Length - ControllerSuffix.Length);
         }
 
-        private static ConcurrentDictionary<Type, string> RouteAreaInfo = new ConcurrentDictionary<Type, string>();
-        
         public static string GetAreaName(this Type type)
         {
             string result;

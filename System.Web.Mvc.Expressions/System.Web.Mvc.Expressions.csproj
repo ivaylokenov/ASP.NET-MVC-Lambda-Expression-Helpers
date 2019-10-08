@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="AjaxHelperExtensions.cs" />
     <Compile Include="ControllerExtensions.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HtmlHelperExtensions.cs" />
     <Compile Include="Internals\ExpressionHelpers.cs" />
     <Compile Include="ModelStateDictionaryExtensions.cs" />
@@ -76,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <AdditionalFiles Include="stylecop.json" />
     <None Include="System.Web.Mvc.Expressions.ruleset" />
   </ItemGroup>
   <ItemGroup>
