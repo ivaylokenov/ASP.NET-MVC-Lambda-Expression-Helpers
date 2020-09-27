@@ -65,7 +65,6 @@
   <ItemGroup>
     <Compile Include="AjaxHelperExtensions.cs" />
     <Compile Include="ControllerExtensions.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HtmlHelperExtensions.cs" />
     <Compile Include="Internals\ExpressionHelpers.cs" />
     <Compile Include="ModelStateDictionaryExtensions.cs" />
