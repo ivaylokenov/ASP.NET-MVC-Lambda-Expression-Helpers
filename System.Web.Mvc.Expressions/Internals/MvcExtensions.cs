@@ -10,10 +10,8 @@
     {
         private const string ControllerSuffix = "Controller";
 
-#pragma warning disable SA1306
-        private static ConcurrentDictionary<MethodInfo, string> ActionNameInfo = new ConcurrentDictionary<MethodInfo, string>();
-        private static ConcurrentDictionary<Type, string> RouteAreaInfo = new ConcurrentDictionary<Type, string>();
-#pragma warning restore SA1306
+        private static readonly ConcurrentDictionary<MethodInfo, string> ActionNameInfo = new ConcurrentDictionary<MethodInfo, string>();
+        private static readonly ConcurrentDictionary<Type, string> RouteAreaInfo = new ConcurrentDictionary<Type, string>();
 
         public static string GetActionName(this LambdaExpression actionExpression)
         {
