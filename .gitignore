@@ -148,7 +148,6 @@ AppPackages/
 sql/
 *.Cache
 ClientBin/
-[Ss]tyle[Cc]op.*
 ~$*
 *~
 *.dbmdl
@@ -179,3 +178,6 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+
+# Visual Studio .vs folder
+.vs/
