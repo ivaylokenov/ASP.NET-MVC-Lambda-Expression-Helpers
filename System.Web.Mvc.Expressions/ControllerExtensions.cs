@@ -6,6 +6,7 @@
     using System.Web.Mvc;
     using System.Web.Mvc.Expressions.Internals;
     using System.Web.Routing;
+    using static System.Web.Mvc.Expressions.Internals.RouteCollectionExtensions;
 
     public static class ControllerExtensions
     {
@@ -89,6 +90,10 @@
         {
             var routeValuesDictionary = new RouteValueDictionary(routeValues);
             routeValuesDictionary.AddRouteValuesFromExpression<TRedirectController>(action);
+            if (!DetermineUsingAreas(RouteTable.Routes))
+            {
+                routeValuesDictionary.Remove("area");
+            }
 
             return new RedirectToRouteResult(null, routeValuesDictionary, permanent);
         }
