@@ -6,6 +6,7 @@
     using System.Web.Mvc;
     using System.Web.Mvc.Expressions.Internals;
     using System.Web.Mvc.Html;
+    using static System.Web.Mvc.Expressions.Internals.RouteCollectionExtensions;
 
     public static class HtmlHelperExtensions
     {
@@ -18,6 +19,11 @@
             where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression<TController>(action, routeValues);
+            if (!DetermineUsingAreas(helper.RouteCollection))
+            {
+                routeInfo.RouteValueDictionary.Remove("area");
+            }
+
             return helper.BeginForm(
                 routeInfo.ActionName,
                 routeInfo.ControllerName,
@@ -35,6 +41,11 @@
             where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression<TController>(action, routeValues);
+            if (!DetermineUsingAreas(helper.RouteCollection))
+            {
+                routeInfo.RouteValueDictionary.Remove("area");
+            }
+
             return helper.BeginForm(
                 routeInfo.ActionName,
                 routeInfo.ControllerName,
@@ -52,6 +63,11 @@
             where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression<TController>(action, routeValues);
+            if (!DetermineUsingAreas(helper.RouteCollection))
+            {
+                routeInfo.RouteValueDictionary.Remove("area");
+            }
+
             return helper.ActionLink(
                 linkText,
                 routeInfo.ActionName,
@@ -69,6 +85,11 @@
             where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression<TController>(action, routeValues);
+            if (!DetermineUsingAreas(helper.RouteCollection))
+            {
+                routeInfo.RouteValueDictionary.Remove("area");
+            }
+
             return helper.ActionLink(
                 linkText,
                 routeInfo.ActionName,
@@ -84,6 +105,11 @@
             where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression<TController>(action, routeValues);
+            if (!DetermineUsingAreas(helper.RouteCollection))
+            {
+                routeInfo.RouteValueDictionary.Remove("area");
+            }
+
             helper.RenderAction(routeInfo.ActionName, routeInfo.ControllerName, routeInfo.RouteValueDictionary);
         }
 
@@ -94,6 +120,11 @@
             where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression<TController>(action, routeValues);
+            if (!DetermineUsingAreas(helper.RouteCollection))
+            {
+                routeInfo.RouteValueDictionary.Remove("area");
+            }
+
             helper.RenderAction(routeInfo.ActionName, routeInfo.ControllerName, routeInfo.RouteValueDictionary);
         }
 
@@ -104,6 +135,11 @@
             where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression<TController>(action, routeValues);
+            if (!DetermineUsingAreas(helper.RouteCollection))
+            {
+                routeInfo.RouteValueDictionary.Remove("area");
+            }
+
             return helper.Action(routeInfo.ActionName, routeInfo.ControllerName, routeInfo.RouteValueDictionary);
         }
 
@@ -114,6 +150,11 @@
             where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression<TController>(action, routeValues);
+            if (!DetermineUsingAreas(helper.RouteCollection))
+            {
+                routeInfo.RouteValueDictionary.Remove("area");
+            }
+
             return helper.Action(routeInfo.ActionName, routeInfo.ControllerName, routeInfo.RouteValueDictionary);
         }
     }

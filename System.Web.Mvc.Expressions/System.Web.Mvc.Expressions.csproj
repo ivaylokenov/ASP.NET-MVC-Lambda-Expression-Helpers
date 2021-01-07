@@ -72,7 +72,9 @@
     <Compile Include="AjaxHelperExtensions.cs" />
     <Compile Include="ControllerExtensions.cs" />
     <Compile Include="HtmlHelperExtensions.cs" />
+    <Compile Include="Internals\AreaHelpers.cs" />
     <Compile Include="Internals\ExpressionHelpers.cs" />
+    <Compile Include="Internals\RouteCollectionExtensions.cs" />
     <Compile Include="ModelStateDictionaryExtensions.cs" />
     <Compile Include="Internals\MvcExtensions.cs" />
     <Compile Include="Internals\RouteValueDictionaryExtensions.cs" />

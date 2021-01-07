@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.Mvc.Expressions.Internals;
+    using static System.Web.Mvc.Expressions.Internals.RouteCollectionExtensions;
 
     public static class UrlHelperExtensions
     {
@@ -15,6 +16,11 @@
             where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression<TController>(action, routeValues);
+            if (!DetermineUsingAreas(url.RouteCollection))
+            {
+                routeInfo.RouteValueDictionary.Remove("area");
+            }
+
             return url.Action(routeInfo.ActionName, routeInfo.ControllerName, routeInfo.RouteValueDictionary);
         }
 
@@ -25,6 +31,11 @@
             where TController : Controller
         {
             var routeInfo = RouteInformation.FromExpression<TController>(action, routeValues);
+            if (!DetermineUsingAreas(url.RouteCollection))
+            {
+                routeInfo.RouteValueDictionary.Remove("area");
+            }
+
             return url.Action(routeInfo.ActionName, routeInfo.ControllerName, routeInfo.RouteValueDictionary);
         }
     }
