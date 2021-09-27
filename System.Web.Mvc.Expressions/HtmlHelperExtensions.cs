@@ -9,6 +9,33 @@
 
     public static class HtmlHelperExtensions
     {
+        /// <summary>Writes an opening &lt;form&gt; tag to the response and sets the action tag to the specified controller and action. The form uses the POST method.</summary>
+        /// <returns>An opening &lt;form&gt; tag.</returns>
+        public static MvcForm BeginForm<TController>(
+            this HtmlHelper helper,
+            Expression<Action<TController>> action,
+            object routeValues = null,
+            object htmlAttributes = null)
+            where TController : Controller
+        {
+            return helper.BeginForm(action, FormMethod.Post, routeValues, htmlAttributes);
+        }
+
+        /// <summary>Writes an opening &lt;form&gt; tag to the response and sets the action tag to the specified controller and action. The form uses the POST method.</summary>
+        /// <returns>An opening &lt;form&gt; tag.</returns>
+        public static MvcForm BeginForm<TController>(
+            this HtmlHelper helper,
+            Expression<Func<TController, Task>> action,
+            object routeValues = null,
+            object htmlAttributes = null)
+            where TController : Controller
+        {
+            return helper.BeginForm(action, FormMethod.Post, routeValues, htmlAttributes);
+        }
+
+
+        /// <summary>Writes an opening &lt;form&gt; tag to the response and sets the action tag to the specified controller and action. The form uses the specified HTTP method and includes the HTML attributes.</summary>
+        /// <returns>An opening &lt;form&gt; tag.</returns>
         public static MvcForm BeginForm<TController>(
                 this HtmlHelper helper,
                 Expression<Action<TController>> action,
@@ -26,6 +53,8 @@
                 HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
         }
 
+        /// <summary>Writes an opening &lt;form&gt; tag to the response and sets the action tag to the specified controller and action. The form uses the specified HTTP method and includes the HTML attributes.</summary>
+        /// <returns>An opening &lt;form&gt; tag.</returns>
         public static MvcForm BeginForm<TController>(
                 this HtmlHelper helper,
                 Expression<Func<TController, Task>> action,
