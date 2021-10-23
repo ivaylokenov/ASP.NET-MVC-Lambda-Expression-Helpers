@@ -6,20 +6,17 @@
 
     public static class ExpressionHelpers
     {
+        private static MethodInfo Compiler = typeof(Controller).Assembly
+            .GetType("System.Web.Mvc.ExpressionUtil.CachedExpressionCompiler")
+            .GetMethod("Process")
+            .MakeGenericMethod(typeof(object), typeof(object));
+
         public static object GetArgumentValue(Expression argumentExpression)
         {
-            object argumentValue;
-            if (argumentExpression.NodeType == ExpressionType.Constant)
-            {
-                argumentValue = ((ConstantExpression)argumentExpression).Value;
-            }
-            else
-            {
-                var typeConversionExpression = Expression.Convert(argumentExpression, typeof(object));
-                argumentValue = Expression.Lambda<Func<object>>(typeConversionExpression, null).Compile().Invoke();
-            }
-
-            return argumentValue;
+            var typeConversionExpression = Expression.Convert(argumentExpression, typeof(object));
+            var parameterExpression = Expression.Parameter(typeof(object));
+            var lambdaExpression = Expression.Lambda<Func<object, object>>(typeConversionExpression, parameterExpression);
+            return ((Func<object, object>)Compiler.Invoke(null, new[] { lambdaExpression })).Invoke(null);
         }
 
         public static string GetExpressionText(LambdaExpression expression)
